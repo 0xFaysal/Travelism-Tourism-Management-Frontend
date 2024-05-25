@@ -1,0 +1,9 @@
+.active {
+    border-bottom: 4px solid #fede3a;
+}
+.navLink li a {
+    padding: 4px 15px !important;
+}
+.text-stroke-black {
+    -webkit-text-stroke: 1px black;
+}

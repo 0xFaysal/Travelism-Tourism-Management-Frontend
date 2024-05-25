@@ -11,3 +11,9 @@
 .raleway {
     font-family: "Raleway", sans-serif;
 }
+body {
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}

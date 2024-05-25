@@ -4,7 +4,7 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
     return (
-        <div className=''>
+        <div className='w-full'>
             <Navbar />
             <Outlet />
             <Footer />

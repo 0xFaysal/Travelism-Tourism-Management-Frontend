@@ -1,8 +1,47 @@
-.home-hero-bg {
+/* .home-hero-bg {
     background: linear-gradient(0deg, rgba(0, 20, 44, 0.3), rgba(0, 0, 0, 0.3)),
         url("../../assets/pic1.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;
     height: 100vh;
+} */
+
+.back-video {
+    width: auto;
+    aspect-ratio: 16/9;
+    height: auto;
+    z-index: -1;
+}
+.parent-of-back-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 0;
+}
+.parent-of-back-video::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    @apply bg-base-100 bg-opacity-10 blur-sm;
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .back-video {
+        width: 100%;
+        height: auto;
+    }
+}
+@media (min-aspect-ratio: 16/9) {
+    .back-video {
+        width: auto;
+        height: 100%;
+    }
 }

@@ -1,8 +1,14 @@
 import {NavLink} from "react-router-dom";
 import "./style.css";
 import {useEffect, useState} from "react";
+import {BsMoonStarsFill} from "react-icons/bs";
+import {PiSunBold} from "react-icons/pi";
+
 function Navbar() {
     const [theme, setTheme] = useState("light");
+    const [navbarBackground, setNavbarBackground] = useState(false);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [visible, setVisible] = useState(true);
 
     const handleThemeChange = () => {
         console.log("theme changed");
@@ -12,6 +18,22 @@ function Navbar() {
         document.documentElement.setAttribute("data-theme", theme);
         console.log({theme}); // apply the theme to the body
     }, [theme]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollPos = window.pageYOffset;
+            const visible = prevScrollPos > currentScrollPos;
+
+            setPrevScrollPos(currentScrollPos);
+            setVisible(visible);
+            setNavbarBackground(currentScrollPos > 80);
+        };
+
+        document.addEventListener("scroll", handleScroll);
+        return () => {
+            document.removeEventListener("scroll", handleScroll);
+        };
+    }, [prevScrollPos, visible, navbarBackground]);
 
     const navItem = (
         <>
@@ -28,7 +50,11 @@ function Navbar() {
     );
 
     return (
-        <div className='fixed w-full'>
+        <div
+            className={` w-full transition z-50 top-0 ${
+                navbarBackground ? "bg-primary" : ""
+            }${visible ? " fixed" : " absolute"}`}
+        >
             <div className='navbar top-0 px-8'>
                 <div className='navbar-start'>
                     <div className='dropdown'>
@@ -61,22 +87,31 @@ function Navbar() {
                     </div>
                     <div className='flex items-center justify-center'>
                         <img src='./favicon.svg' alt='logo' className='w-16' />
-                        <a className='font-raleway text-2xl text-[#1CAEE4]  font-bold'>
+                        <a className='font-raleway text-2xl uppercase text-base-content  font-bold'>
                             Tavelism
                         </a>
                     </div>
                 </div>
                 <div className='navbar-center hidden lg:flex'>
-                    <ul className='flex gap-4 text-base px-1'>{navItem}</ul>
+                    <ul className='flex gap-6 navLink font-medium text-base px-1'>
+                        {navItem}
+                    </ul>
                 </div>
-                <div className='navbar-end'>
+                <div className='navbar-end space-x-6'>
                     <button
-                        className='btn btn-ghost'
+                        className='btn btn-ghost font-bold text-2xl'
                         onClick={handleThemeChange}
                     >
-                        {theme === "light" ? "Dark" : "Light"} Mode
+                        {theme === "light" ? (
+                            <BsMoonStarsFill />
+                        ) : (
+                            <PiSunBold />
+                        )}
                     </button>
-                    <a className='btn'>Button</a>
+                    <div className='space-x-4'>
+                        <button className='btn btn-secondary'>Sign Up</button>
+                        <button className='btn btn-accent'>Login</button>
+                    </div>
                 </div>
             </div>
         </div>
