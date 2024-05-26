@@ -33,7 +33,7 @@ export default {
                     secondary: "#009ADD",
                     "secondary-content": "#ffffff",
                     accent: "#FEDE3A",
-                    "accent-content": "#ffff",
+                    "accent-content": "#000",
                     neutral: "#222831",
                     "neutral-content": "#ffffff",
                     "base-100": "#112D4E",

@@ -1,4 +1,4 @@
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import "./style.css";
 import {useEffect, useState} from "react";
 import {BsMoonStarsFill} from "react-icons/bs";
@@ -57,7 +57,7 @@ function Navbar() {
         >
             <div className='navbar top-0 px-8'>
                 <div className='navbar-start'>
-                    <div className='dropdown'>
+                    <div className='dropdown max-md:hidden block'>
                         <div
                             tabIndex={0}
                             role='button'
@@ -97,7 +97,7 @@ function Navbar() {
                         {navItem}
                     </ul>
                 </div>
-                <div className='navbar-end space-x-6'>
+                <div className='navbar-end md:space-x-6 space-x-0'>
                     <button
                         className='btn btn-ghost font-bold text-2xl'
                         onClick={handleThemeChange}
@@ -108,9 +108,43 @@ function Navbar() {
                             <PiSunBold />
                         )}
                     </button>
-                    <div className='space-x-4'>
-                        <button className='btn btn-secondary'>Sign Up</button>
-                        <button className='btn btn-accent'>Login</button>
+                    <div className='space-x-4 hidden md:block'>
+                        <Link to='/signup'>
+                            <button className='btn btn-secondary'>
+                                Sign Up
+                            </button>
+                        </Link>
+                        <Link to='/login'>
+                            <button className='btn btn-accent'>Login</button>
+                        </Link>
+                    </div>
+                    <div className='dropdown block md:hidden'>
+                        <div
+                            tabIndex={0}
+                            role='button'
+                            className='btn btn-ghost lg:hidden'
+                        >
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='h-5 w-5'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                            >
+                                <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    strokeWidth='2'
+                                    d='M4 6h16M4 12h8m-8 6h16'
+                                />
+                            </svg>
+                        </div>
+                        <ul
+                            tabIndex={0}
+                            className='menu relative right-0 menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
+                        >
+                            {navItem}
+                        </ul>
                     </div>
                 </div>
             </div>

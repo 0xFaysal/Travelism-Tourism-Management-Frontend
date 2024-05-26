@@ -4,10 +4,12 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
     return (
-        <div className='w-full'>
+        <div>
             <Navbar />
-            <Outlet />
-            <Footer />
+            <div className='container mx-auto'>
+                <Outlet />
+                <Footer />
+            </div>
         </div>
     );
 }
