@@ -1,17 +1,78 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import google from "../../assets/google.svg";
 import github from "../../assets/github-mark.svg";
-import image from "../../assets/pic4.jpg";
-import {useState} from "react";
+import image from "../../assets/pic4-min (1).jpg";
+import {useContext, useState} from "react";
 import {FaEye, FaEyeSlash, FaCheckCircle} from "react-icons/fa";
+import {AuthContext} from "../../provider/AuthProvider";
 
 function SignUp() {
+    //all the states
+    const [password, setPassword] = useState("");
+
+    //context API
+    const {
+        signInWithGoogle,
+        signInWithGithub,
+        signUpWithEmailAndPassword,
+        profileUpdate,
+    } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    //Google Sign In
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    //Github Sign In
+    const handleGithubSignIn = () => {
+        signInWithGithub()
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    //Form Submit
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const photoUrl = form.photourl.value;
+        const email = form.email.value;
+        console.log(name, photoUrl, email, password);
+
+        //sign up with email and password
+        signUpWithEmailAndPassword(email, password)
+            .then(() => {
+                profileUpdate(name, photoUrl)
+                    .then(() => {
+                        navigate("/");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    //Password Show Hide and Validation
     const [showPassword, setShowPassword] = useState(false);
     const [passwordFocus, setPasswordFocus] = useState(false);
     const [passUpperCase, setPassUpperCase] = useState(false);
     const [passLowerCase, setPassLowerCase] = useState(false);
     const [passLength, setPassLength] = useState(false);
-    const [password, setPassword] = useState("");
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -48,7 +109,7 @@ function SignUp() {
                         Welcome to Travelism
                     </h3>
                     <h1 className='text-4xl font-bold text-left'>Sign Up</h1>
-                    <form className='mt-8'>
+                    <form onSubmit={handleFormSubmit} className='mt-8'>
                         <div className='mb-5'>
                             <label
                                 htmlFor='name'
@@ -179,11 +240,17 @@ function SignUp() {
                                 Or Sign Up With
                             </p>
                             <div className='flex justify-center gap-4 mt-6'>
-                                <button className='p-2 w-fit items-center flex font-medium border border-blue-500 rounded-md'>
+                                <button
+                                    onClick={handleGoogleSignIn}
+                                    className='p-2 w-fit items-center flex font-medium border border-blue-500 rounded-md'
+                                >
                                     <img width={50} src={google} alt='' />
                                     <p>Google</p>
                                 </button>
-                                <button className='p-2 gap-3 w-fit items-center flex font-medium border border-blue-500 rounded-md'>
+                                <button
+                                    onClick={handleGithubSignIn}
+                                    className='p-2 gap-3 w-fit items-center flex font-medium border border-blue-500 rounded-md'
+                                >
                                     <img width={30} src={github} alt='' />
                                     <p>Github</p>
                                 </button>
@@ -193,11 +260,11 @@ function SignUp() {
                 </div>
                 <div className='w-1/4 -ml-4 hidden lg:block shadow-lg flex-grow relative'>
                     <img
-                        className=' object-cover h-full rounded-r-lg'
+                        className='w-full object-cover h-full rounded-r-lg'
                         src={image}
                         alt=''
                     />
-                    <div className='absolute  bottom-20 px-5 text-white font-raleway font-semibold text-2xl'>
+                    <div className='absolute w-full  bottom-20 px-5 text-white font-raleway font-semibold text-2xl'>
                         <p>
                             <span className='text-4xl'>&quot;</span>The world is
                             a book, and those who do not travel read only a

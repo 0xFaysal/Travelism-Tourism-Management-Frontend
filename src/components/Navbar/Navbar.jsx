@@ -41,10 +41,13 @@ function Navbar() {
                 <NavLink to='/'>Home</NavLink>
             </li>
             <li>
-                <a>Tourist Spots</a>
+                <NavLink to='/tourist_spots'>Tourist Spots</NavLink>
             </li>
             <li>
-                <a>About Us</a>
+                <NavLink to={"/add_tourist_spot"}>Add Tourists Spot</NavLink>
+            </li>
+            <li>
+                <NavLink to={"/my_list"}>My List</NavLink>
             </li>
         </>
     );

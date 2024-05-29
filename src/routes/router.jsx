@@ -29,6 +29,18 @@ const router = createBrowserRouter([
                 path: "/signup",
                 element: <SignUp></SignUp>,
             },
+            {
+                path: "/tourist_spots",
+                element: <h1>Tourist Spots</h1>,
+            },
+            {
+                path: "/add_tourist_spot",
+                element: <h1>Add Tourist Spot</h1>,
+            },
+            {
+                path: "/my_list",
+                element: <h1>My List</h1>,
+            },
         ],
     },
 ]);

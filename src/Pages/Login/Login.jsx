@@ -1,18 +1,61 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import google from "../../assets/google.svg";
 import github from "../../assets/github-mark.svg";
 import image from "../../assets/pic5.jpg";
+import {useContext} from "react";
+import {AuthContext} from "../../provider/AuthProvider";
 
 function Login() {
+    //context API
+    const {signInWithGoogle, signInWithGithub, signIn} =
+        useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    //Google Sign In
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    //Github Sign In
+    const handleGithubSignIn = () => {
+        signInWithGithub()
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        signIn(email, password)
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <div className='w-ful h-screen my-28 grid px-28 place-items-center'>
-            <div className='flex justify-center items-stretch h-full'>
+            <div className='flex flex-row-reverse justify-center items-stretch h-full'>
                 <div
                     className='w-96 p-6 px-24 pt-12 bg-white rounded-lg shadow-lg flex-grow'
                     data-theme='light'
                 >
                     <h1 className='text-3xl font-bold text-center'>Login</h1>
-                    <form className='mt-6'>
+                    <form onSubmit={handleFormSubmit} className='mt-6'>
                         <div className='mb-5'>
                             <label
                                 htmlFor='email'
@@ -65,11 +108,17 @@ function Login() {
                                 Or Login With
                             </p>
                             <div className='flex justify-center gap-4 mt-6'>
-                                <button className='p-2 w-fit items-center flex font-medium border border-blue-500 rounded-md'>
+                                <button
+                                    onClick={handleGoogleSignIn}
+                                    className='p-2 w-fit items-center flex font-medium border border-blue-500 rounded-md'
+                                >
                                     <img width={50} src={google} alt='' />
                                     <p>Google</p>
                                 </button>
-                                <button className='p-2 gap-3 w-fit items-center flex font-medium border border-blue-500 rounded-md'>
+                                <button
+                                    onClick={handleGithubSignIn}
+                                    className='p-2 gap-3 w-fit items-center flex font-medium border border-blue-500 rounded-md'
+                                >
                                     <img width={30} src={github} alt='' />
                                     <p>Github</p>
                                 </button>
