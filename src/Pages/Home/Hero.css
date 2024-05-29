@@ -68,3 +68,7 @@
         height: 100%;
     }
 }
+
+.backdrop-blur-md {
+    backdrop-filter: blur(20px);
+}

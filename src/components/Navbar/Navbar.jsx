@@ -7,7 +7,7 @@ import {AuthContext} from "../../provider/AuthProvider";
 
 function Navbar() {
     //Theme and Navbar Style
-    const [theme, setTheme] = useState("light");
+    const [theme, setTheme] = useState("dark");
     const [navbarBackground, setNavbarBackground] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
@@ -53,23 +53,6 @@ function Navbar() {
             <li>
                 <NavLink to={"/my_list"}>My List</NavLink>
             </li>
-        </>
-    );
-
-    const ButtonItem = (
-        <>
-            {!user ? (
-                <div className='space-x-4 hidden md:block'>
-                    <Link to='/signup'>
-                        <button className='btn btn-secondary'>Sign Up</button>
-                    </Link>
-                    <Link to='/login'>
-                        <button className='btn btn-accent'>Login</button>
-                    </Link>
-                </div>
-            ) : (
-                <h1>{user.displayName}</h1>
-            )}
         </>
     );
 
