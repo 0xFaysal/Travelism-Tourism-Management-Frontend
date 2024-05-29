@@ -1,29 +1,33 @@
 import {Link, NavLink} from "react-router-dom";
 import "./style.css";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {BsMoonStarsFill} from "react-icons/bs";
 import {PiSunBold} from "react-icons/pi";
+import {AuthContext} from "../../provider/AuthProvider";
 
 function Navbar() {
+    //Theme and Navbar Style
     const [theme, setTheme] = useState("light");
     const [navbarBackground, setNavbarBackground] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
 
+    const {user} = useContext(AuthContext);
+
+    //theme handler
     const handleThemeChange = () => {
-        console.log("theme changed");
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     };
+
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);
-        console.log({theme}); // apply the theme to the body
     }, [theme]);
 
+    // Navbar background Handler
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollPos = window.pageYOffset;
             const visible = prevScrollPos > currentScrollPos;
-
             setPrevScrollPos(currentScrollPos);
             setVisible(visible);
             setNavbarBackground(currentScrollPos > 80);
@@ -49,6 +53,23 @@ function Navbar() {
             <li>
                 <NavLink to={"/my_list"}>My List</NavLink>
             </li>
+        </>
+    );
+
+    const ButtonItem = (
+        <>
+            {!user ? (
+                <div className='space-x-4 hidden md:block'>
+                    <Link to='/signup'>
+                        <button className='btn btn-secondary'>Sign Up</button>
+                    </Link>
+                    <Link to='/login'>
+                        <button className='btn btn-accent'>Login</button>
+                    </Link>
+                </div>
+            ) : (
+                <h1>{user.displayName}</h1>
+            )}
         </>
     );
 
@@ -111,16 +132,31 @@ function Navbar() {
                             <PiSunBold />
                         )}
                     </button>
-                    <div className='space-x-4 hidden md:block'>
-                        <Link to='/signup'>
-                            <button className='btn btn-secondary'>
-                                Sign Up
-                            </button>
-                        </Link>
-                        <Link to='/login'>
-                            <button className='btn btn-accent'>Login</button>
-                        </Link>
-                    </div>
+                    {!user ? (
+                        <div className='space-x-4 hidden md:block'>
+                            <Link to='/signup'>
+                                <button className='btn btn-secondary'>
+                                    Sign Up
+                                </button>
+                            </Link>
+                            <Link to='/login'>
+                                <button className='btn btn-accent'>
+                                    Login
+                                </button>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className='flex gap-3 items-center'>
+                            <h1 className='hidden md:block'>
+                                {user.displayName}
+                            </h1>
+                            <div className='avatar'>
+                                <div className='w-12 rounded-full'>
+                                    <img src={user.photoURL} alt='avatar' />
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <div className='dropdown block md:hidden'>
                         <div
                             tabIndex={0}
@@ -144,9 +180,27 @@ function Navbar() {
                         </div>
                         <ul
                             tabIndex={0}
-                            className='menu relative right-0 menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
+                            className='menu-my relative right-0 menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
                         >
                             {navItem}
+                            {!user ? (
+                                <>
+                                    <li className='w-full'>
+                                        <Link to='/signup' className='w-full'>
+                                            <button className='w-full px-3 py-4 rounded-lg bg-secondary'>
+                                                Sign Up
+                                            </button>
+                                        </Link>
+                                    </li>
+                                    <li className='w-full'>
+                                        <Link to='/login'>
+                                            <button className='btn btn-accent w-full'>
+                                                Login
+                                            </button>
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : null}
                         </ul>
                     </div>
                 </div>

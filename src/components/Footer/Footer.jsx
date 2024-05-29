@@ -4,7 +4,11 @@ function Footer() {
             <footer className='p-10 bg-base-200 text-base-content font-Plus w-full pt-20'>
                 <div className='flex container mx-auto justify-around text-textPrimary flex-wrap gap-y-6'>
                     <aside className='text-btnSecondary '>
-                        <img src='./favicon.svg' alt='logo' className='w-24' />
+                        <img
+                            src='./favicon.svg'
+                            alt='logo'
+                            className='w-24 ml-10'
+                        />
                         <div>
                             <h1 className='font-bold text-3xl'>TRAVELISM</h1>
                             <p>Travel far, wander often.</p>

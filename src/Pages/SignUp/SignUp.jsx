@@ -1,10 +1,13 @@
 import {Link, useNavigate} from "react-router-dom";
+import {useContext, useState} from "react";
+import {AuthContext} from "../../provider/AuthProvider";
+
+import {FaEye, FaEyeSlash, FaCheckCircle} from "react-icons/fa";
+
+//Image
 import google from "../../assets/google.svg";
 import github from "../../assets/github-mark.svg";
 import image from "../../assets/pic4-min (1).jpg";
-import {useContext, useState} from "react";
-import {FaEye, FaEyeSlash, FaCheckCircle} from "react-icons/fa";
-import {AuthContext} from "../../provider/AuthProvider";
 
 function SignUp() {
     //all the states
@@ -49,7 +52,6 @@ function SignUp() {
         const name = form.name.value;
         const photoUrl = form.photourl.value;
         const email = form.email.value;
-        console.log(name, photoUrl, email, password);
 
         //sign up with email and password
         signUpWithEmailAndPassword(email, password)
