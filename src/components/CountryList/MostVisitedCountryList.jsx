@@ -7,7 +7,6 @@ import img2 from "../../assets/thailand-in-pictures-most-beautiful-places-doi-in
 import img3 from "../../assets/LANGKAWI.jpg";
 import img4 from "../../assets/180403062612-03-most-beautiful-places-in-vietnam-restricted.jpg";
 import img5 from "../../assets/1_VnT2NnUgJOgkiYtgv-Tfjg.jpg";
-// import {Slide} from "react-awesome-reveal";
 import {Fade} from "react-awesome-reveal";
 
 function MostVisitedCountryList() {
