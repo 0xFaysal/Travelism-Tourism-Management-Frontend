@@ -1,8 +1,10 @@
 import {Link, NavLink} from "react-router-dom";
+import swal from "sweetalert";
 import "./style.css";
 import {useContext, useEffect, useState} from "react";
 import {BsMoonStarsFill} from "react-icons/bs";
 import {PiSunBold} from "react-icons/pi";
+import {Tooltip} from "react-tooltip";
 import {AuthContext} from "../../provider/AuthProvider";
 
 function Navbar() {
@@ -12,7 +14,7 @@ function Navbar() {
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
 
-    const {user} = useContext(AuthContext);
+    const {user, signOutUser} = useContext(AuthContext);
 
     //theme handler
     const handleThemeChange = () => {
@@ -39,6 +41,31 @@ function Navbar() {
         };
     }, [prevScrollPos, visible, navbarBackground]);
 
+    //Sign Out Handler
+    const handleSignOutBtn = () => {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to sign out?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willSignOut) => {
+            if (willSignOut) {
+                signOutUser()
+                    .then(() => {
+                        swal("You are signed out!", {
+                            icon: "success",
+                        });
+                    })
+                    .catch(() => {
+                        swal("Something went wrong!", {
+                            icon: "error",
+                        });
+                    });
+            }
+        });
+    };
+
     const navItem = (
         <>
             <li>
@@ -47,12 +74,18 @@ function Navbar() {
             <li>
                 <NavLink to='/tourist_spots'>Tourist Spots</NavLink>
             </li>
-            <li>
-                <NavLink to={"/add_tourist_spot"}>Add Tourists Spot</NavLink>
-            </li>
-            <li>
-                <NavLink to={"/my_list"}>My List</NavLink>
-            </li>
+            {user ? (
+                <>
+                    <li>
+                        <NavLink to={"/add_tourist_spot"}>
+                            Add Tourists Spot
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={"/my_list"}>My List</NavLink>
+                    </li>
+                </>
+            ) : null}
         </>
     );
 
@@ -134,10 +167,30 @@ function Navbar() {
                                 {user.displayName}
                             </h1>
                             <div className='avatar'>
-                                <div className='w-12 rounded-full'>
+                                <div
+                                    id='clickable'
+                                    className='w-12 rounded-full'
+                                >
                                     <img src={user.photoURL} alt='avatar' />
                                 </div>
                             </div>
+                            <Tooltip
+                                anchorSelect='#clickable'
+                                clickable
+                                place='bottom-start'
+                            >
+                                <Link to='/profile'>
+                                    <button className='btn btn-secondary w-24 block'>
+                                        Profile
+                                    </button>
+                                </Link>
+                                <button
+                                    onClick={handleSignOutBtn}
+                                    className='btn btn-error w-24 mt-2 block'
+                                >
+                                    Sign Out
+                                </button>
+                            </Tooltip>
                         </div>
                     )}
                     <div className='dropdown block md:hidden'>

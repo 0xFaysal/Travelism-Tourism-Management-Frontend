@@ -18,8 +18,8 @@
 
 ## Npm Package List
 
-├── @emotion/react@11.11.4
-├── @types/react-dom@18.3.0
+├── @emotion/react@11.11.4 <br>
+├── @types/react-dom@18.3.0 
 ├── @types/react@18.3.2
 ├── @vitejs/plugin-react@4.3.0
 ├── animate.css@4.1.1

@@ -12,20 +12,14 @@ import {Fade} from "react-awesome-reveal";
 function MostVisitedCountryList() {
     return (
         <div className='mt-16 px-8' id='first'>
-            <Fade
-                direction='up'
-                triggerOnce
-                duration={800}
-                cascade
-                damping={0.75}
-            >
+            <Fade direction='up' triggerOnce duration={800} cascade>
                 <h2 className='text-accent font-medium text-lg'>
                     Most Visited Countries
                 </h2>
                 <h1 className='font-bold text-3xl mt-3'>
                     Explore Beautiful Places Around The World.
                 </h1>
-                <div className='carousel carousel-center p-4 space-x-4 rounded-box mt-6'>
+                <div className='carousel carousel-center w-full p-4 space-x-4 rounded-box mt-6'>
                     <div className='carousel-item flex-col gap-y-0'>
                         <img
                             src={img1}

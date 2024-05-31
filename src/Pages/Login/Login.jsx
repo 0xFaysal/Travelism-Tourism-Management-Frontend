@@ -4,6 +4,7 @@ import github from "../../assets/github-mark.svg";
 import image from "../../assets/pic5.jpg";
 import {useContext} from "react";
 import {AuthContext} from "../../provider/AuthProvider";
+import {toast, Bounce} from "react-toastify";
 
 function Login() {
     //context API
@@ -34,18 +35,71 @@ function Login() {
             });
     };
 
+    const notify = (msg, type = "error") => {
+        if (type === "error") {
+            toast.error(msg, {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            });
+        } else {
+            toast.success(msg, {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            });
+        }
+    };
+
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
 
+        if (!email || !password) {
+            notify("Please fill all the fields");
+            return;
+        }
+
         //Sign In with email and password
         signIn(email, password)
             .then(() => {
+                notify("Logged in successfully", "success");
                 navigate("/");
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.code, error.message);
+                if (error.code === "auth/user-not-found") {
+                    notify("User not found");
+                } else if (error.code === "auth/wrong-password") {
+                    notify("Invalid Password");
+                } else if (error.code === "auth/too-many-requests") {
+                    notify("Too many requests. Try again later");
+                } else if (error.code === "auth/network-request-failed") {
+                    notify("Network error. Try again later");
+                } else if (error.code === "auth/invalid-email") {
+                    notify("Invalid Email");
+                } else if (error.code === "auth/user-disabled") {
+                    notify("User is disabled");
+                } else if (error.code === "auth/user-token-expired") {
+                    notify("User token expired. Please sign in again");
+                } else if (error.code === "auth/invalid-credential") {
+                    notify("Invalid Credential");
+                } else {
+                    notify(error.message);
+                }
             });
     };
 
@@ -71,6 +125,7 @@ function Login() {
                                 name='email'
                                 placeholder='Your Email'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
+                                required
                             />
                         </div>
                         <div className='mb-5'>
@@ -86,6 +141,7 @@ function Login() {
                                 name='password'
                                 placeholder='Your Password'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
+                                required
                             />
                         </div>
                         <button

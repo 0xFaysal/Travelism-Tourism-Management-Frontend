@@ -25,6 +25,8 @@ export default {
                     "base-100": "#ffffff",
                     "base-200": "#ffffff",
                     "base-content": "#000000",
+                    danger: "#FF3860",
+                    "danger-content": "#ffffff",
                 },
                 dark: {
                     ...require("daisyui/src/theming/themes")["dark"],
@@ -39,6 +41,8 @@ export default {
                     "base-100": "#112D4E",
                     "base-200": "#112D40",
                     "base-content": "#fff",
+                    danger: "#FF3860",
+                    "danger-content": "#ffffff",
                 },
             },
         ],

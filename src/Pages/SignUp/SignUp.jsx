@@ -53,6 +53,10 @@ function SignUp() {
         const photoUrl = form.photourl.value;
         const email = form.email.value;
 
+        if (!name || !photoUrl || !email || !password) {
+            return;
+        }
+
         //sign up with email and password
         signUpWithEmailAndPassword(email, password)
             .then(() => {
@@ -125,6 +129,7 @@ function SignUp() {
                                 name='name'
                                 placeholder='Your Name'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
+                                required
                             />
                         </div>
                         <div className='mb-5'>
@@ -140,6 +145,7 @@ function SignUp() {
                                 name='photourl'
                                 placeholder='Your Photo URL'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
+                                required
                             />
                         </div>
                         <div className='mb-5'>
@@ -155,6 +161,7 @@ function SignUp() {
                                 name='email'
                                 placeholder='Your Email'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
+                                required
                             />
                         </div>
                         <div className='mb-5 relative'>
@@ -172,6 +179,7 @@ function SignUp() {
                                 name='password'
                                 placeholder='Your Password'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
+                                required
                             />
                             <div
                                 onClick={handleShowPassword}
@@ -222,7 +230,13 @@ function SignUp() {
                         )}
                         <button
                             type='submit'
-                            className='w-full px-3 py-4 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600'
+                            disabled={
+                                !passUpperCase ||
+                                !passLowerCase ||
+                                !passLength ||
+                                !password
+                            }
+                            className='w-full px-3 py-4 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed'
                         >
                             Sign Up
                         </button>
