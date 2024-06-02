@@ -23,6 +23,9 @@ function AddTouristSpot() {
 
     const data = {
         id: 9,
+        userId: user?.uid,
+        userName: user?.displayName || "Anonymous",
+        userEmail: user?.email || "example@email.com",
         tourists_spot_name: touristSpotName,
         country_name: countryName,
         location: location,
@@ -31,8 +34,6 @@ function AddTouristSpot() {
         seasonality: seasonality,
         travel_time: travelTime,
         total_visitors_per_year: totalVisitorsPerYear,
-        user_name: user?.displayName || "Anonymous",
-        user_email: user?.email || "example@email.com",
         user_photo:
             user?.photoURL ||
             "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg",

@@ -13,8 +13,8 @@ function Card({data, buttonType = "enabled"}) {
         seasonality,
         travel_time,
         total_visitors_per_year,
-        user_name,
-        user_email,
+        userName,
+        userEmail,
         user_photo,
         image,
     } = data;
@@ -32,14 +32,14 @@ function Card({data, buttonType = "enabled"}) {
                 <div className='flex items-center gap-4 absolute top-2 left-4'>
                     <div className='avatar'>
                         <div className='w-8 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2'>
-                            <img src={user_photo} alt={user_name} />
+                            <img src={user_photo} alt={userName} />
                         </div>
                     </div>
                     <div className='user_info'>
                         <h4 className='font-bold text-base user_info '>
-                            {user_name}
+                            {userName}
                         </h4>
-                        <p className='text-xs'>{user_email}</p>
+                        <p className='text-xs'>{userEmail}</p>
                     </div>
                 </div>
                 <div className='card-body text-black'>
@@ -116,8 +116,8 @@ Card.propTypes = {
         seasonality: PropTypes.string,
         travel_time: PropTypes.string,
         total_visitors_per_year: PropTypes.number,
-        user_name: PropTypes.string,
-        user_email: PropTypes.string,
+        userName: PropTypes.string,
+        userEmail: PropTypes.string,
         user_photo: PropTypes.string,
         image: PropTypes.string,
     }),
