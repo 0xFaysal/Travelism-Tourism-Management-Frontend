@@ -19,6 +19,7 @@ function SignUp() {
         signInWithGithub,
         signUpWithEmailAndPassword,
         profileUpdate,
+        setNewUserInDatabase,
     } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -26,8 +27,11 @@ function SignUp() {
     //Google Sign In
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-            .then(() => {
-                navigate("/");
+            .then((user) => {
+                // console.log(user.user);
+                setNewUserInDatabase(user.user).then(() => {
+                    navigate("/");
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -37,8 +41,10 @@ function SignUp() {
     //Github Sign In
     const handleGithubSignIn = () => {
         signInWithGithub()
-            .then(() => {
-                navigate("/");
+            .then((user) => {
+                setNewUserInDatabase(user.user).then(() => {
+                    navigate("/");
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -61,8 +67,11 @@ function SignUp() {
         signUpWithEmailAndPassword(email, password)
             .then(() => {
                 profileUpdate(name, photoUrl)
-                    .then(() => {
-                        navigate("/");
+                    .then((user) => {
+                        // console.log(user);
+                        setNewUserInDatabase(user.user).then(() => {
+                            navigate("/");
+                        });
                     })
                     .catch((error) => {
                         console.log(error);
@@ -105,10 +114,10 @@ function SignUp() {
     };
 
     return (
-        <div className='w-ful h-screen my-28 px-28 grid place-items-center'>
+        <div className='w-ful h-screen my-28 px-18 md:px-28 grid place-items-center'>
             <div className='flex justify-center items-stretch h-full'>
                 <div
-                    className='w-96 p-6 px-24 bg-white rounded-lg shadow-lg flex-grow'
+                    className='w-96 p-6 px-8 lg:px-24 bg-white rounded-lg shadow-lg flex-grow'
                     data-theme='light'
                 >
                     <h3 className='mb-2 text-gray-600 font-bold text-left'>

@@ -1,6 +1,7 @@
 import {useContext, useState} from "react";
 import Card from "./../../components/Card/Card";
 import {AuthContext} from "../../provider/AuthProvider";
+import {swal} from "sweetalert";
 
 function AddTouristSpot() {
     const [touristSpotName, setTouristSpotName] = useState(
@@ -16,13 +17,12 @@ function AddTouristSpot() {
     );
     const [averageCost, setAverageCost] = useState(0);
     const [seasonality, setSeasonality] = useState("Default");
-    const [travelTime, setTravelTime] = useState("");
+    const [travelTime, setTravelTime] = useState(0);
     const [totalVisitorsPerYear, setTotalVisitorsPerYear] = useState(0);
 
     const {user} = useContext(AuthContext);
 
     const data = {
-        id: 9,
         userId: user?.uid,
         userName: user?.displayName || "Anonymous",
         userEmail: user?.email || "example@email.com",
@@ -42,6 +42,32 @@ function AddTouristSpot() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
+
+        fetch("http://localhost:3000/api/v1/insert/post", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.status === 200) {
+                    e.target.reset();
+                    swal({
+                        title: "Success!",
+                        text: "Tourist Spot Added Successfully",
+                        icon: "success",
+                    });
+                    // swal("Good job!", "You clicked the button!", "success");
+                } else {
+                    alert("Failed to add Tourist Spot");
+                }
+                console.log("Success:", data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
     };
 
     return (

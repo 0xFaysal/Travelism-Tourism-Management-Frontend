@@ -5,6 +5,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Error from "../Pages/Error/Error";
 import AddTouristSpot from "../Pages/AddTouristSpot/AddTouristSpot";
+import Privet from "./Privet";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/add_tourist_spot",
-                element: <AddTouristSpot></AddTouristSpot>,
+                element: (
+                    <Privet>
+                        <AddTouristSpot></AddTouristSpot>
+                    </Privet>
+                ),
             },
             {
                 path: "/my_list",

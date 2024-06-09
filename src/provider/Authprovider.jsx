@@ -21,15 +21,18 @@ const providerGit = new GithubAuthProvider();
 
 function AuthProvider({children}) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // useEffect to check if the user is logged in or not
     useEffect(() => {
         const subscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-                console.log(user);
+                setLoading(false);
+                // console.log(user);
             } else {
                 setUser(null);
+                setLoading(false);
                 console.log("No User");
             }
         });
@@ -47,11 +50,13 @@ function AuthProvider({children}) {
 
     //sign Up user with email and password
     const signUpWithEmailAndPassword = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
 
     //sign In user with email and password
     const signIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
 
@@ -68,6 +73,24 @@ function AuthProvider({children}) {
         });
     };
 
+    //set new user in the database
+    const setNewUserInDatabase = (user) => {
+        const data = {
+            userId: user?.uid,
+            userEmail: user?.email,
+            userName: user?.displayName,
+            userCreationTime: user?.metadata.creationTime,
+            userLastSignInTime: user?.metadata.lastSignInTime,
+        };
+        return fetch("http://localhost:3000/api/v1/insert/user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+    };
+
     //data to be passed to the context
     const data = {
         user,
@@ -75,8 +98,10 @@ function AuthProvider({children}) {
         signInWithGithub,
         signUpWithEmailAndPassword,
         signIn,
+        loading,
         profileUpdate,
         signOutUser,
+        setNewUserInDatabase,
     };
 
     return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;

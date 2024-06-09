@@ -104,10 +104,10 @@ function Login() {
     };
 
     return (
-        <div className='w-ful h-screen my-28 grid px-28 place-items-center'>
+        <div className='w-ful h-screen my-28 grid px-18 md:px-28 place-items-center'>
             <div className='flex flex-row-reverse justify-center items-stretch h-full'>
                 <div
-                    className='w-96 p-6 px-24 pt-12 bg-white rounded-lg shadow-lg flex-grow'
+                    className='w-96 p-6 px-18 lg:px-24 pt-12 bg-white rounded-lg shadow-lg flex-grow'
                     data-theme='light'
                 >
                     <h1 className='text-3xl font-bold text-center'>Login</h1>

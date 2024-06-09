@@ -11,8 +11,8 @@ import {Fade} from "react-awesome-reveal";
 
 function MostVisitedCountryList() {
     return (
-        <div className='mt-16 px-8' id='first'>
-            <Fade direction='up' triggerOnce duration={800} cascade>
+        <div className='mt-16 px-8 container mx-auto' id='first'>
+            <Fade triggerOnce duration={500} cascade>
                 <h2 className='text-accent font-medium text-lg'>
                     Most Visited Countries
                 </h2>

@@ -3,7 +3,6 @@ import {LuCalendarDays} from "react-icons/lu";
 import {PropTypes} from "prop-types";
 
 function Card({data, buttonType = "enabled"}) {
-    console.log(buttonType);
     const {
         tourists_spot_name,
         country_name,
