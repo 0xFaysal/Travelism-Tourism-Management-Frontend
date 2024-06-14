@@ -19,7 +19,7 @@ export default {
                     secondary: "#FEDE3A",
                     "secondary-content": "#000",
                     accent: "#473080",
-                    "accent-content": "#000",
+                    "accent-content": "#ffffff",
                     neutral: "#222831",
                     "neutral-content": "#ffffff",
                     "base-100": "#ffffff",

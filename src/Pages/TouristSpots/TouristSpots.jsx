@@ -1,7 +1,6 @@
-import Select from "react-select";
-import "./AllTouristPlace.css";
 import {useEffect, useState} from "react";
-import Card from "../Card/Card";
+import Select from "react-select";
+import Card from "../../components/Card/Card";
 
 const options = [
     {value: "views", label: "Total Viewed"},
@@ -33,35 +32,31 @@ const customStyles = {
 };
 
 async function getData(parameter) {
-    const response = await fetch(
-        `http://localhost:3000/api/v1/get/data=${parameter}`
-    );
-    const data = await response.json();
-    console.log(data);
-    return data;
+    try {
+        const response = await fetch(
+            `http://localhost:3000/api/v1/get/data=${parameter}`
+        );
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+    // console.log(data);
 }
 
-function AllTouristPace() {
+function TouristSpots() {
     const [filerItems, setFilerItems] = useState("all");
     const [data, setData] = useState([]);
 
     useEffect(() => {
         // getData(filerItems);
         getData(filerItems).then((data) => {
-            const slicedData = data.slice(0, 6);
-            setData(slicedData);
+            setData(data);
         });
         console.log(data);
     }, []);
-
     return (
-        <section className='mt-24 container mx-auto'>
-            <h3 className='text-center font-medium text-accent uppercase md:text-lg text-base'>
-                Explore Popular Spots
-            </h3>
-            <h1 className='text-center font-bold text-3xl md:text-5xl mt-3'>
-                What we offer is an unforgettable <br /> journey and experience.
-            </h1>
+        <section className='container mx-auto mt-28'>
             <div className='flex flex-col md:flex-row items-center justify-center gap-4 mt-8'>
                 <div>
                     <div className='border-2 border-base-content px-3 py-2 rounded-full backdrop-blur-lg'>
@@ -170,13 +165,8 @@ function AllTouristPace() {
                         ))}
                 </div>
             </dir>
-            <div className='w-full flex justify-center items-center mt-8'>
-                <button className='btn btn-accent text-accent-content'>
-                    Explore More
-                </button>
-            </div>
         </section>
     );
 }
 
-export default AllTouristPace;
+export default TouristSpots;
