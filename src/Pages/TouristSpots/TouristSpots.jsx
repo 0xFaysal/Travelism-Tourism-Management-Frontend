@@ -157,7 +157,7 @@ function TouristSpots() {
                     Cambodia
                 </button>
             </div>
-            <dir className='grid place-items-center w-full'>
+            <dir className='grid p-0 place-items-center w-full'>
                 <div className='grid  place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-12  w-fit gap-8'>
                     {Array.isArray(data) &&
                         data.map((item) => (

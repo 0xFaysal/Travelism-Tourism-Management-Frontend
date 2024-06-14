@@ -162,8 +162,8 @@ function AllTouristPace() {
                     Cambodia
                 </button>
             </div>
-            <dir className='grid place-items-center w-full'>
-                <div className='grid  place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-12  w-fit gap-8'>
+            <dir className='flex items-center w-full p-0 justify-center mt-12 '>
+                <div className='grid grid-cols-1 lg:flex-nowrap flex-wrap md:grid-cols-2 lg:grid-cols-3 w-fit gap-8'>
                     {Array.isArray(data) &&
                         data.map((item) => (
                             <Card key={item?._id} data={item} />

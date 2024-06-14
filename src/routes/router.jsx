@@ -7,6 +7,7 @@ import Error from "../Pages/Error/Error";
 import AddTouristSpot from "../Pages/AddTouristSpot/AddTouristSpot";
 import Privet from "./Privet";
 import TouristSpots from "../Pages/TouristSpots/TouristSpots";
+import MyList from "../Pages/MyList/MyList";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/my_list",
-                element: <h1>My List</h1>,
+                element: (
+                    <Privet>
+                        <MyList></MyList>
+                    </Privet>
+                ),
             },
             {
                 path: "/profile",
