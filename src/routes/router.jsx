@@ -8,6 +8,8 @@ import AddTouristSpot from "../Pages/AddTouristSpot/AddTouristSpot";
 import Privet from "./Privet";
 import TouristSpots from "../Pages/TouristSpots/TouristSpots";
 import MyList from "../Pages/MyList/MyList";
+import FulDetails from "../Pages/FullDetails/FulDetails";
+import Update from "../Pages/Update/Update";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +40,26 @@ const router = createBrowserRouter([
                         <AddTouristSpot></AddTouristSpot>
                     </Privet>
                 ),
+            },
+            {
+                path: "/details/:id",
+                element: (
+                    <Privet>
+                        <FulDetails></FulDetails>
+                    </Privet>
+                ),
+                loader: ({params}) =>
+                    fetch(`http://localhost:3000/api/v1/get/data=${params.id}`),
+            },
+            {
+                path: "/update/:id",
+                element: (
+                    <Privet>
+                        <Update></Update>
+                    </Privet>
+                ),
+                loader: ({params}) =>
+                    fetch(`http://localhost:3000/api/v1/get/data=${params.id}`),
             },
             {
                 path: "/my_list",

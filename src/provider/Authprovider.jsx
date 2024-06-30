@@ -33,7 +33,7 @@ function AuthProvider({children}) {
             } else {
                 setUser(null);
                 setLoading(false);
-                console.log("No User");
+                // console.log("No User");
             }
         });
         return () => subscribe();

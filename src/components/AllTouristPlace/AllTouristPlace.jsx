@@ -37,13 +37,35 @@ async function getData(parameter) {
         `http://localhost:3000/api/v1/get/data=${parameter}`
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return data;
 }
 
 function AllTouristPace() {
     const [filerItems, setFilerItems] = useState("all");
+
     const [data, setData] = useState([]);
+
+    const handleChange = (selectedOption) => {
+        if (selectedOption?.value === "views") {
+            const sortedData = [...data].sort(
+                (a, b) => b.total_visitors_per_year - a.total_visitors_per_year
+            );
+            setData(sortedData);
+        }
+        if (selectedOption?.value === "price") {
+            const sortedData = [...data].sort(
+                (a, b) => a.average_cost - b.average_cost
+            );
+            setData(sortedData);
+        }
+        if (selectedOption?.value === "time") {
+            const sortedData = [...data].sort(
+                (a, b) => a.travel_time - b.travel_time
+            );
+            setData(sortedData);
+        }
+    };
 
     useEffect(() => {
         // getData(filerItems);
@@ -51,8 +73,8 @@ function AllTouristPace() {
             const slicedData = data.slice(0, 6);
             setData(slicedData);
         });
-        console.log(data);
-    }, []);
+        // console.log(data);
+    }, [filerItems]);
 
     return (
         <section className='mt-24 container mx-auto'>
@@ -85,6 +107,7 @@ function AllTouristPace() {
                         isRtl={false}
                         isSearchable={false}
                         name='color'
+                        onChange={handleChange}
                         styles={customStyles}
                         options={options}
                     />

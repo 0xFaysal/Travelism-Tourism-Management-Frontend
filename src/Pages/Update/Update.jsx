@@ -2,23 +2,25 @@ import {useContext, useState} from "react";
 import Card from "./../../components/Card/Card";
 import {AuthContext} from "../../provider/AuthProvider";
 import swal from "sweetalert";
+import {useLoaderData, useNavigate} from "react-router-dom";
 
-function AddTouristSpot() {
+function Update() {
+    const loaderData = useLoaderData();
+    const navigate = useNavigate();
+
     const [touristSpotName, setTouristSpotName] = useState(
-        "Default Tourist Spot"
+        loaderData.tourists_spot_name
     );
-    const [photoUrl, setPhotoUrl] = useState(
-        "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
+    const [photoUrl, setPhotoUrl] = useState(loaderData.image);
+    const [countryName, setCountryName] = useState(loaderData.country_name);
+    const [location, setLocation] = useState(loaderData.location);
+    const [description, setDescription] = useState(loaderData.description);
+    const [averageCost, setAverageCost] = useState(loaderData.average_cost);
+    const [seasonality, setSeasonality] = useState(loaderData.seasonality);
+    const [travelTime, setTravelTime] = useState(loaderData.travel_time);
+    const [totalVisitorsPerYear, setTotalVisitorsPerYear] = useState(
+        loaderData.total_visitors_per_year
     );
-    const [countryName, setCountryName] = useState("Default Country");
-    const [location, setLocation] = useState("Default Location");
-    const [description, setDescription] = useState(
-        "Default Description..............."
-    );
-    const [averageCost, setAverageCost] = useState(0);
-    const [seasonality, setSeasonality] = useState("Default");
-    const [travelTime, setTravelTime] = useState(0);
-    const [totalVisitorsPerYear, setTotalVisitorsPerYear] = useState(0);
 
     const {user} = useContext(AuthContext);
 
@@ -43,8 +45,8 @@ function AddTouristSpot() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        fetch("http://localhost:3000/api/v1/insert/post", {
-            method: "POST",
+        fetch(`http://localhost:3000/api/v1/update/data=${loaderData._id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -59,11 +61,15 @@ function AddTouristSpot() {
                         text: "Tourist Spot Added Successfully",
                         icon: "success",
                     });
+                    navigate("/my_list");
                     // swal("Good job!", "You clicked the button!", "success");
                 } else {
-                    alert("Failed to add Tourist Spot");
+                    swal({
+                        title: "Error!",
+                        text: "Something went wrong",
+                        icon: "error",
+                    });
                 }
-                // console.log("Success:", data);
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -95,6 +101,7 @@ function AddTouristSpot() {
                                 }}
                                 id='tourist_spot_name'
                                 name='tourist_spot_name'
+                                defaultValue={loaderData.tourists_spot_name}
                                 placeholder='Tourist Spot Name'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
                                 required
@@ -114,6 +121,7 @@ function AddTouristSpot() {
                                     setPhotoUrl(e.target.value);
                                 }}
                                 name='photo_url'
+                                defaultValue={loaderData.image}
                                 placeholder='Photo URL'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
                                 required
@@ -130,6 +138,7 @@ function AddTouristSpot() {
                                 <select
                                     id='country_name'
                                     name='country_name'
+                                    defaultValue={loaderData.country_name}
                                     onChange={(e) => {
                                         setCountryName(e.target.value);
                                     }}
@@ -141,7 +150,6 @@ function AddTouristSpot() {
                                         Bangladesh
                                     </option>
                                     <option value='Thailand'>Thailand</option>
-                                    <option value='Indonesia'>Indonesia</option>
                                     <option value='Malaysia'>Malaysia</option>
                                     <option value='Vietnam'>Vietnam</option>
                                     <option value='Cambodia'>Cambodia</option>
@@ -161,6 +169,7 @@ function AddTouristSpot() {
                                         setLocation(e.target.value);
                                     }}
                                     name='location'
+                                    defaultValue={loaderData.location}
                                     placeholder='Location'
                                     className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
                                     required
@@ -181,6 +190,7 @@ function AddTouristSpot() {
                                     setDescription(e.target.value);
                                 }}
                                 name='email'
+                                defaultValue={loaderData.description}
                                 rows={"4"}
                                 placeholder='Description'
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100'
@@ -198,6 +208,7 @@ function AddTouristSpot() {
                                 <input
                                     type='number'
                                     id='average_cost'
+                                    defaultValue={loaderData.average_cost}
                                     onChange={(e) => {
                                         setAverageCost(e.target.value);
                                     }}
@@ -218,6 +229,7 @@ function AddTouristSpot() {
                                     type='number'
                                     id='time'
                                     name='time'
+                                    defaultValue={loaderData.travel_time}
                                     onChange={(e) => {
                                         setTravelTime(e.target.value);
                                     }}
@@ -238,6 +250,7 @@ function AddTouristSpot() {
                                 <select
                                     id='seasonality'
                                     name='seasonality'
+                                    defaultValue={loaderData.seasonality}
                                     onChange={(e) => {
                                         setSeasonality(e.target.value);
                                     }}
@@ -265,6 +278,9 @@ function AddTouristSpot() {
                                 <input
                                     type='number'
                                     id='total_visitors_per_year'
+                                    defaultValue={
+                                        loaderData.total_visitors_per_year
+                                    }
                                     onChange={(e) => {
                                         setTotalVisitorsPerYear(e.target.value);
                                     }}
@@ -289,4 +305,4 @@ function AddTouristSpot() {
     );
 }
 
-export default AddTouristSpot;
+export default Update;

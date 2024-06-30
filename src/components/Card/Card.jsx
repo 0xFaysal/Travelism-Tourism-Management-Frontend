@@ -1,9 +1,11 @@
 import {IoLocationOutline} from "react-icons/io5";
 import {LuCalendarDays} from "react-icons/lu";
 import {PropTypes} from "prop-types";
+import {Link} from "react-router-dom";
 
 function Card({data, buttonType = "enabled"}) {
     const {
+        _id,
         tourists_spot_name,
         country_name,
         location,
@@ -46,7 +48,7 @@ function Card({data, buttonType = "enabled"}) {
                         {tourists_spot_name}
                     </h2>
                     <div>
-                        <p className='space-x-1 -mt-2 ml-1'>
+                        <p className='space-x-1 -mt-2 ml-0'>
                             <IoLocationOutline className='inline font-bold text-lg' />
                             <span>{country_name}</span>
                             <span>{location}</span>
@@ -92,9 +94,11 @@ function Card({data, buttonType = "enabled"}) {
                                 View Detail
                             </button>
                         ) : (
-                            <button className='btn btn-secondary'>
-                                View Details
-                            </button>
+                            <Link to={`/details/${_id}`}>
+                                <button className='btn btn-secondary'>
+                                    View Details
+                                </button>
+                            </Link>
                         )}
                     </div>
                 </div>
@@ -107,6 +111,7 @@ export default Card;
 
 Card.propTypes = {
     data: PropTypes.shape({
+        _id: PropTypes.string,
         tourists_spot_name: PropTypes.string,
         country_name: PropTypes.string,
         location: PropTypes.string,

@@ -48,13 +48,34 @@ function TouristSpots() {
     const [filerItems, setFilerItems] = useState("all");
     const [data, setData] = useState([]);
 
+    const handleChange = (selectedOption) => {
+        if (selectedOption?.value === "views") {
+            const sortedData = [...data].sort(
+                (a, b) => b.total_visitors_per_year - a.total_visitors_per_year
+            );
+            setData(sortedData);
+        }
+        if (selectedOption?.value === "price") {
+            const sortedData = [...data].sort(
+                (a, b) => a.average_cost - b.average_cost
+            );
+            setData(sortedData);
+        }
+        if (selectedOption?.value === "time") {
+            const sortedData = [...data].sort(
+                (a, b) => a.travel_time - b.travel_time
+            );
+            setData(sortedData);
+        }
+    };
+
     useEffect(() => {
         // getData(filerItems);
         getData(filerItems).then((data) => {
             setData(data);
         });
-        console.log(data);
-    }, []);
+        // console.log(data);
+    }, [filerItems]);
     return (
         <section className='container mx-auto mt-28'>
             <div className='flex flex-col md:flex-row items-center justify-center gap-4 mt-8'>
@@ -81,6 +102,7 @@ function TouristSpots() {
                         isSearchable={false}
                         name='color'
                         styles={customStyles}
+                        onChange={handleChange}
                         options={options}
                     />
                 </div>

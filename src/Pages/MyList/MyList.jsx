@@ -2,6 +2,8 @@ import {useContext, useEffect, useState} from "react";
 import Select from "react-select";
 import Card from "../../components/Card/Card";
 import {AuthContext} from "../../provider/AuthProvider";
+import {Link} from "react-router-dom";
+import swal from "sweetalert";
 
 const options = [
     {value: "views", label: "Total Viewed"},
@@ -50,7 +52,6 @@ function MyList() {
     const [edit, setEdit] = useState(false);
 
     const {user} = useContext(AuthContext);
-    console.log(user.uid);
     const [filerItems, setFilerItems] = useState(user.uid);
 
     useEffect(() => {
@@ -58,8 +59,63 @@ function MyList() {
         getData(filerItems).then((data) => {
             setData(data);
         });
-        console.log(data);
-    }, []);
+        // console.log(data);
+    }, [filerItems]);
+
+    const handleChange = (selectedOption) => {
+        if (selectedOption?.value === "views") {
+            const sortedData = [...data].sort(
+                (a, b) => b.total_visitors_per_year - a.total_visitors_per_year
+            );
+            setData(sortedData);
+        }
+        if (selectedOption?.value === "price") {
+            const sortedData = [...data].sort(
+                (a, b) => a.average_cost - b.average_cost
+            );
+            setData(sortedData);
+        }
+        if (selectedOption?.value === "time") {
+            const sortedData = [...data].sort(
+                (a, b) => a.travel_time - b.travel_time
+            );
+            setData(sortedData);
+        }
+    };
+
+    const handleDelete = (id) => {
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to delete this post?",
+            icon: "warning",
+            dangerMode: true,
+            buttons: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                fetch(`http://localhost:3000/api/v1/delete/data=${id}`, {
+                    method: "DELETE",
+                })
+                    .then((response) => response.json())
+                    .then((d) => {
+                        if (d.status === 400) {
+                            swal("Error", "Something went wrong", "error");
+                            return;
+                        }
+                        const newData = data.filter((item) => item._id !== id);
+                        setData(newData);
+                        swal(
+                            "Deleted!",
+                            "Your Post has been deleted!",
+                            "success"
+                        );
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        });
+    };
+
     return (
         <section className='container mx-auto mt-28'>
             <div className='flex flex-col md:flex-row items-center justify-around gap-4 mt-8'>
@@ -152,6 +208,7 @@ function MyList() {
                             isRtl={false}
                             isSearchable={false}
                             name='color'
+                            onChange={handleChange}
                             styles={customStyles}
                             options={options}
                         />
@@ -162,14 +219,21 @@ function MyList() {
                 <div className='grid  place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-12  w-fit gap-8'>
                     {Array.isArray(data) &&
                         data.map((item) => (
-                            <div key={item.id} className='w-fit'>
+                            <div key={item?._id} className='w-fit'>
                                 <Card key={item?._id} data={item} />
                                 {edit ? (
-                                    <div>
-                                        <button className='btn btn-accent px-2 w-1/2 py-1 rounded-lg'>
-                                            Update
-                                        </button>
-                                        <button className='btn btn-error w-1/2 mt-2 '>
+                                    <div className='space-x-5 ml-4'>
+                                        <Link to={`/update/${item?._id}`}>
+                                            <button className='btn btn-accent px-2 w-[45%] py-1 rounded-lg'>
+                                                Update
+                                            </button>
+                                        </Link>
+                                        <button
+                                            onClick={() =>
+                                                handleDelete(item?._id)
+                                            }
+                                            className='btn btn-error w-[45%] mt-2 '
+                                        >
                                             Remove
                                         </button>
                                     </div>
