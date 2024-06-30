@@ -34,25 +34,24 @@ const customStyles = {
     // other styles
 };
 
-async function getData(parameter) {
-    try {
+function MyList() {
+    const [data, setData] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [loading, setLoading] = useState(null);
+
+    const {user} = useContext(AuthContext);
+    const [filerItems, setFilerItems] = useState(user.uid);
+
+    async function getData(parameter) {
+        setLoading(true);
         const response = await fetch(
             `http://localhost:3000/api/v1/get/data=${parameter}`
         );
         const data = await response.json();
+        setLoading(false);
+        console.log("SetLoading is called");
         return data;
-    } catch (error) {
-        console.log(error);
     }
-    // console.log(data);
-}
-
-function MyList() {
-    const [data, setData] = useState([]);
-    const [edit, setEdit] = useState(false);
-
-    const {user} = useContext(AuthContext);
-    const [filerItems, setFilerItems] = useState(user.uid);
 
     useEffect(() => {
         // getData(filerItems);
@@ -216,31 +215,37 @@ function MyList() {
                 </div>
             </div>
             <dir className='grid p-0 place-items-center w-full'>
-                <div className='grid  place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-12  w-fit gap-8'>
-                    {Array.isArray(data) &&
-                        data.map((item) => (
-                            <div key={item?._id} className='w-fit'>
-                                <Card key={item?._id} data={item} />
-                                {edit ? (
-                                    <div className='space-x-5 ml-4'>
-                                        <Link to={`/update/${item?._id}`}>
-                                            <button className='btn btn-accent px-2 w-[45%] py-1 rounded-lg'>
-                                                Update
+                {loading ? (
+                    <div className='mt-15 h-screen w-full grid place-items-center'>
+                        <span className='loading loading-bars loading-lg'></span>
+                    </div>
+                ) : (
+                    <div className='grid  place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-12  w-fit gap-8'>
+                        {Array.isArray(data) &&
+                            data.map((item) => (
+                                <div key={item?._id} className='w-fit'>
+                                    <Card key={item?._id} data={item} />
+                                    {edit ? (
+                                        <div className='space-x-5 ml-4'>
+                                            <Link to={`/update/${item?._id}`}>
+                                                <button className='btn btn-accent px-2 w-[45%] py-1 rounded-lg'>
+                                                    Update
+                                                </button>
+                                            </Link>
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(item?._id)
+                                                }
+                                                className='btn btn-error w-[45%] mt-2 '
+                                            >
+                                                Remove
                                             </button>
-                                        </Link>
-                                        <button
-                                            onClick={() =>
-                                                handleDelete(item?._id)
-                                            }
-                                            className='btn btn-error w-[45%] mt-2 '
-                                        >
-                                            Remove
-                                        </button>
-                                    </div>
-                                ) : null}
-                            </div>
-                        ))}
-                </div>
+                                        </div>
+                                    ) : null}
+                                </div>
+                            ))}
+                    </div>
+                )}
             </dir>
         </section>
     );

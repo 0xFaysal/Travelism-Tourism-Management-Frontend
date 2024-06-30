@@ -31,22 +31,21 @@ const customStyles = {
     // other styles
 };
 
-async function getData(parameter) {
-    try {
+function TouristSpots() {
+    const [filerItems, setFilerItems] = useState("all");
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(null);
+
+    async function getData(parameter) {
+        setLoading(true);
         const response = await fetch(
             `http://localhost:3000/api/v1/get/data=${parameter}`
         );
         const data = await response.json();
+        setLoading(false);
+        console.log("SetLoading is called");
         return data;
-    } catch (error) {
-        console.log(error);
     }
-    // console.log(data);
-}
-
-function TouristSpots() {
-    const [filerItems, setFilerItems] = useState("all");
-    const [data, setData] = useState([]);
 
     const handleChange = (selectedOption) => {
         if (selectedOption?.value === "views") {
@@ -180,12 +179,18 @@ function TouristSpots() {
                 </button>
             </div>
             <dir className='grid p-0 place-items-center w-full'>
-                <div className='grid  place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-12  w-fit gap-8'>
-                    {Array.isArray(data) &&
-                        data.map((item) => (
-                            <Card key={item?._id} data={item} />
-                        ))}
-                </div>
+                {loading ? (
+                    <div className='mt-15 h-screen w-full grid place-items-center'>
+                        <span className='loading loading-bars loading-lg'></span>
+                    </div>
+                ) : (
+                    <div className='grid grid-cols-1 lg:flex-nowrap flex-wrap md:grid-cols-2 lg:grid-cols-3 w-fit gap-8'>
+                        {Array.isArray(data) &&
+                            data.map((item) => (
+                                <Card key={item?._id} data={item} />
+                            ))}
+                    </div>
+                )}
             </dir>
         </section>
     );

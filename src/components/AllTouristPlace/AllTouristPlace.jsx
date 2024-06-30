@@ -32,19 +32,21 @@ const customStyles = {
     // other styles
 };
 
-async function getData(parameter) {
-    const response = await fetch(
-        `http://localhost:3000/api/v1/get/data=${parameter}`
-    );
-    const data = await response.json();
-    // console.log(data);
-    return data;
-}
-
 function AllTouristPace() {
     const [filerItems, setFilerItems] = useState("all");
-
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(null);
+
+    async function getData(parameter) {
+        setLoading(true);
+        const response = await fetch(
+            `http://localhost:3000/api/v1/get/data=${parameter}`
+        );
+        const data = await response.json();
+        setLoading(false);
+        console.log("SetLoading is called");
+        return data;
+    }
 
     const handleChange = (selectedOption) => {
         if (selectedOption?.value === "views") {
@@ -186,12 +188,18 @@ function AllTouristPace() {
                 </button>
             </div>
             <dir className='flex items-center w-full p-0 justify-center mt-12 '>
-                <div className='grid grid-cols-1 lg:flex-nowrap flex-wrap md:grid-cols-2 lg:grid-cols-3 w-fit gap-8'>
-                    {Array.isArray(data) &&
-                        data.map((item) => (
-                            <Card key={item?._id} data={item} />
-                        ))}
-                </div>
+                {loading ? (
+                    <div className='mt-15 h-screen w-full grid place-items-center'>
+                        <span className='loading loading-bars loading-lg'></span>
+                    </div>
+                ) : (
+                    <div className='grid grid-cols-1 lg:flex-nowrap flex-wrap md:grid-cols-2 lg:grid-cols-3 w-fit gap-8'>
+                        {Array.isArray(data) &&
+                            data.map((item) => (
+                                <Card key={item?._id} data={item} />
+                            ))}
+                    </div>
+                )}
             </dir>
             <div className='w-full flex justify-center items-center mt-8'>
                 <button className='btn btn-accent text-accent-content'>
