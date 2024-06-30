@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Select from "react-select";
 import Card from "../../components/Card/Card";
 
@@ -35,6 +35,7 @@ function TouristSpots() {
     const [filerItems, setFilerItems] = useState("all");
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(null);
+    const searchData = useRef(null);
 
     async function getData(parameter) {
         setLoading(true);
@@ -46,6 +47,35 @@ function TouristSpots() {
         console.log("SetLoading is called");
         return data;
     }
+
+    async function search(perameter) {
+        setLoading(true);
+        const response = await fetch(
+            `http://localhost:3000/api/v1/get/search=${perameter}`
+        );
+        const data = await response.json();
+        setLoading(false);
+        console.log("SetLoading is called");
+        return data;
+    }
+
+    const handleInput = (e) => {
+        if (e.target.value) {
+            console.log(e.target.value);
+            search(e.target.value).then((data) => {
+                setData(data);
+            });
+        }
+    };
+
+    const handleSearch = () => {
+        const searchValue = searchData.current.value;
+        if (searchValue) {
+            search(searchValue).then((data) => {
+                setData(data);
+            });
+        }
+    };
 
     const handleChange = (selectedOption) => {
         if (selectedOption?.value === "views") {
@@ -84,8 +114,13 @@ function TouristSpots() {
                             type='text'
                             className='bg-transparent outline-none border-none font-medium text-lg text-base-content placeholder:text-base-content ml-2 w-48 md:w-80 py-2'
                             placeholder='Search for a place...'
+                            onChange={handleInput}
+                            ref={searchData}
                         />
-                        <button className='bg-base-content text-secondary  px-4 md:px-8 font-medium py-2 rounded-full'>
+                        <button
+                            onClick={handleSearch}
+                            className='bg-base-content text-secondary  px-4 md:px-8 font-medium py-2 rounded-full'
+                        >
                             Search
                         </button>
                     </div>
