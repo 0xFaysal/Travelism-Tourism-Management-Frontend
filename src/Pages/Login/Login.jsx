@@ -19,8 +19,8 @@ function Login() {
             .then(() => {
                 navigate("/");
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                //console.log(error);
             });
     };
 
@@ -30,8 +30,8 @@ function Login() {
             .then(() => {
                 navigate("/");
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                //console.log(error);
             });
     };
 
@@ -80,7 +80,7 @@ function Login() {
                 navigate("/");
             })
             .catch((error) => {
-                console.log(error.code, error.message);
+                //console.log(error.code, error.message);
                 if (error.code === "auth/user-not-found") {
                     notify("User not found");
                 } else if (error.code === "auth/wrong-password") {

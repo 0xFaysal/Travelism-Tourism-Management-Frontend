@@ -29,11 +29,9 @@ function AuthProvider({children}) {
             if (user) {
                 setUser(user);
                 setLoading(false);
-                // console.log(user);
             } else {
                 setUser(null);
                 setLoading(false);
-                // console.log("No User");
             }
         });
         return () => subscribe();

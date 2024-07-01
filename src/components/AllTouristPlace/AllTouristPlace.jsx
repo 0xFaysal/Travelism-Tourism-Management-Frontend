@@ -46,7 +46,6 @@ function AllTouristPace() {
         );
         const data = await response.json();
         setLoading(false);
-        console.log("SetLoading is called");
         return data;
     }
 
@@ -57,13 +56,11 @@ function AllTouristPace() {
         );
         const data = await response.json();
         setLoading(false);
-        console.log("SetLoading is called");
         return data;
     }
 
     const handleInput = (e) => {
         if (e.target.value) {
-            console.log(e.target.value);
             search(e.target.value).then((data) => {
                 setData(data);
             });
@@ -106,7 +103,6 @@ function AllTouristPace() {
             const slicedData = data.slice(0, 6);
             setData(slicedData);
         });
-        // console.log(data);
     }, [filerItems]);
 
     return (
@@ -244,6 +240,7 @@ function AllTouristPace() {
                     </button>
                 </Link>
             </div>
+            {console.clear()}
         </section>
     );
 }

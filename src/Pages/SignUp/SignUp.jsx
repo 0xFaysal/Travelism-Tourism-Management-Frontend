@@ -8,6 +8,7 @@ import {FaEye, FaEyeSlash, FaCheckCircle} from "react-icons/fa";
 import google from "../../assets/google.svg";
 import github from "../../assets/github-mark.svg";
 import image from "../../assets/pic4-min (1).jpg";
+import notify from "../../utility/Notify";
 
 function SignUp() {
     //all the states
@@ -28,13 +29,12 @@ function SignUp() {
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then((user) => {
-                // console.log(user.user);
                 setNewUserInDatabase(user.user).then(() => {
                     navigate("/");
                 });
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                // console.log(error);
             });
     };
 
@@ -46,8 +46,8 @@ function SignUp() {
                     navigate("/");
                 });
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                //console.log(error);
             });
     };
 
@@ -68,17 +68,27 @@ function SignUp() {
             .then(() => {
                 profileUpdate(name, photoUrl)
                     .then((user) => {
-                        // console.log(user);
-                        setNewUserInDatabase(user.user).then(() => {
-                            navigate("/");
-                        });
+                        setNewUserInDatabase(user?.user)
+                            .then(() => {
+                                console.log("User Created");
+                                form.reset();
+                                navigate("/");
+                            })
+                            .catch((er) => {
+                                console.log(er);
+                                notify("Error occurs 1");
+                            });
                     })
-                    .catch((error) => {
-                        console.log(error);
+                    .catch((er) => {
+                        console.log(er);
+                        notify("Error occurs 2");
                     });
             })
-            .catch((error) => {
-                console.log(error);
+            .catch((er) => {
+                if (er.code == "auth/email-already-in-use") {
+                    notify("Email already exist");
+                }
+                // notify("Error occurs");
             });
     };
 

@@ -18,7 +18,7 @@ function WhyUS() {
                     accommodated.
                 </h1>
             </div>
-            <div className='flex w-full flex-wrap lg:flex-nowrap gap-10 px-8 justify-center"'>
+            <div className='flex w-full flex-wrap lg:flex-nowrap gap-10 px-8 justify-center items-center"'>
                 <div className='flex items-center justify-center flex-col text-center  w-96'>
                     <div className='bg-blue-100 shadow-lg w-12 h-12 border-4 text-lg border-base-100 text-blue-600 flex items-center justify-center rounded-full'>
                         <GiChessQueen />

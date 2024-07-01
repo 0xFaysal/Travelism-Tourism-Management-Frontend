@@ -125,12 +125,18 @@ function Navbar() {
                             {navItem}
                         </ul>
                     </div>
-                    <div className='flex items-center justify-center'>
-                        <img src='./favicon.svg' alt='logo' className='w-16' />
-                        <a className='font-raleway text-2xl uppercase text-base-content  font-bold'>
-                            Tavelism
-                        </a>
-                    </div>
+                    <Link to='/'>
+                        <div className='flex items-center justify-center'>
+                            <img
+                                src='./favicon.svg'
+                                alt='logo'
+                                className='w-16'
+                            />
+                            <h1 className='font-raleway text-2xl uppercase text-base-content  font-bold'>
+                                Tavelism
+                            </h1>
+                        </div>
+                    </Link>
                 </div>
                 <div className='navbar-center hidden lg:flex'>
                     <ul className='flex gap-6 navLink font-medium text-base px-1'>

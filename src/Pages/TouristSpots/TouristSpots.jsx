@@ -44,7 +44,6 @@ function TouristSpots() {
         );
         const data = await response.json();
         setLoading(false);
-        console.log("SetLoading is called");
         return data;
     }
 
@@ -55,13 +54,11 @@ function TouristSpots() {
         );
         const data = await response.json();
         setLoading(false);
-        console.log("SetLoading is called");
         return data;
     }
 
     const handleInput = (e) => {
         if (e.target.value) {
-            console.log(e.target.value);
             search(e.target.value).then((data) => {
                 setData(data);
             });
@@ -99,11 +96,9 @@ function TouristSpots() {
     };
 
     useEffect(() => {
-        // getData(filerItems);
         getData(filerItems).then((data) => {
             setData(data);
         });
-        // console.log(data);
     }, [filerItems]);
     return (
         <section className='container mx-auto mt-28'>

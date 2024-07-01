@@ -49,14 +49,14 @@ function MyList() {
         );
         const data = await response.json();
         setLoading(false);
-        console.log("SetLoading is called");
         return data;
     }
 
     useEffect(() => {
         // getData(filerItems);
         getData(filerItems).then((data) => {
-            setData(data);
+            const newData = data.filter((item) => item.userId === user.uid);
+            setData(newData);
         });
         // console.log(data);
     }, [filerItems]);
@@ -108,8 +108,8 @@ function MyList() {
                             "success"
                         );
                     })
-                    .catch((error) => {
-                        console.log(error);
+                    .catch(() => {
+                        //console.log(error);
                     });
             }
         });
@@ -216,9 +216,19 @@ function MyList() {
             </div>
             <dir className='grid p-0 place-items-center w-full'>
                 {loading ? (
-                    <div className='mt-15 h-screen w-full grid place-items-center'>
-                        <span className='loading loading-bars loading-lg'></span>
-                    </div>
+                    data.length === 0 ? (
+                        <h1 className='text-2xl font-bold text-center mt-12'>
+                            No Post Found
+                        </h1>
+                    ) : (
+                        <div className='mt-15 h-screen w-full grid place-items-center'>
+                            <span className='loading loading-bars loading-lg'></span>
+                        </div>
+                    )
+                ) : data.length === 0 ? (
+                    <h1 className='text-2xl font-bold text-center mt-12'>
+                        No Post Found
+                    </h1>
                 ) : (
                     <div className='grid  place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-12  w-fit gap-8'>
                         {Array.isArray(data) &&

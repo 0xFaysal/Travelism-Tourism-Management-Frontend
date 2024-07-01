@@ -59,14 +59,20 @@ function AddTouristSpot() {
                         text: "Tourist Spot Added Successfully",
                         icon: "success",
                     });
-                    // swal("Good job!", "You clicked the button!", "success");
                 } else {
-                    alert("Failed to add Tourist Spot");
+                    swal({
+                        title: "Error!",
+                        text: "Failed to Add Tourist Spot",
+                        icon: "error",
+                    });
                 }
-                // console.log("Success:", data);
             })
-            .catch((error) => {
-                console.error("Error:", error);
+            .catch(() => {
+                swal({
+                    title: "Error!",
+                    text: "Failed to Add Tourist Spot",
+                    icon: "error",
+                });
             });
     };
 
@@ -196,7 +202,7 @@ function AddTouristSpot() {
                                     Average Cost
                                 </label>
                                 <input
-                                    type='number'
+                                    type='text'
                                     id='average_cost'
                                     onChange={(e) => {
                                         setAverageCost(e.target.value);
@@ -215,7 +221,7 @@ function AddTouristSpot() {
                                     Travel Time
                                 </label>
                                 <input
-                                    type='number'
+                                    type='text'
                                     id='time'
                                     name='time'
                                     onChange={(e) => {
@@ -263,7 +269,7 @@ function AddTouristSpot() {
                                     Total Visitors Per Year
                                 </label>
                                 <input
-                                    type='number'
+                                    type='text'
                                     id='total_visitors_per_year'
                                     onChange={(e) => {
                                         setTotalVisitorsPerYear(e.target.value);
