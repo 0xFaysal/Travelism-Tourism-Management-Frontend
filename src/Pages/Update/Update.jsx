@@ -45,13 +45,16 @@ function Update() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:3000/api/v1/update/data=${loaderData._id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
+        fetch(
+            `https://travelism-xi.vercel.app/api/v1/update/data=${loaderData._id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            }
+        )
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 200) {

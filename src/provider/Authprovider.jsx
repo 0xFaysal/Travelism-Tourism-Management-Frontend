@@ -80,7 +80,7 @@ function AuthProvider({children}) {
             userCreationTime: user?.metadata.creationTime,
             userLastSignInTime: user?.metadata.lastSignInTime,
         };
-        return fetch("http://localhost:3000/api/v1/insert/user", {
+        return fetch("https://travelism-xi.vercel.app/api/v1/insert/user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

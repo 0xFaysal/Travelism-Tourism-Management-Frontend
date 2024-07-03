@@ -43,7 +43,7 @@ function AddTouristSpot() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        fetch("http://localhost:3000/api/v1/insert/post", {
+        fetch("https://travelism-xi.vercel.app/api/v1/insert/post", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

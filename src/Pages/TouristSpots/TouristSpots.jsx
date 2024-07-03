@@ -40,7 +40,7 @@ function TouristSpots() {
     async function getData(parameter) {
         setLoading(true);
         const response = await fetch(
-            `http://localhost:3000/api/v1/get/data=${parameter}`
+            `https://travelism-xi.vercel.app/api/v1/get/data=${parameter}`
         );
         const data = await response.json();
         setLoading(false);
@@ -50,7 +50,7 @@ function TouristSpots() {
     async function search(perameter) {
         setLoading(true);
         const response = await fetch(
-            `http://localhost:3000/api/v1/get/search=${perameter}`
+            `https://travelism-xi.vercel.app/api/v1/get/search=${perameter}`
         );
         const data = await response.json();
         setLoading(false);

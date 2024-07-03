@@ -45,7 +45,7 @@ function MyList() {
     async function getData(parameter) {
         setLoading(true);
         const response = await fetch(
-            `http://localhost:3000/api/v1/get/data=${parameter}`
+            `https://travelism-xi.vercel.app/api/v1/get/data=${parameter}`
         );
         const data = await response.json();
         setLoading(false);
@@ -91,9 +91,12 @@ function MyList() {
             buttons: true,
         }).then((willDelete) => {
             if (willDelete) {
-                fetch(`http://localhost:3000/api/v1/delete/data=${id}`, {
-                    method: "DELETE",
-                })
+                fetch(
+                    `https://travelism-xi.vercel.app/api/v1/delete/data=${id}`,
+                    {
+                        method: "DELETE",
+                    }
+                )
                     .then((response) => response.json())
                     .then((d) => {
                         if (d.status === 400) {
