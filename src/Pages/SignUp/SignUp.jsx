@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../provider/AuthProvider";
 
 import {FaEye, FaEyeSlash, FaCheckCircle} from "react-icons/fa";
@@ -20,6 +20,7 @@ function SignUp() {
         signInWithGithub,
         signUpWithEmailAndPassword,
         profileUpdate,
+        user,
         setNewUserInDatabase,
     } = useContext(AuthContext);
 
@@ -65,12 +66,13 @@ function SignUp() {
 
         //sign up with email and password
         signUpWithEmailAndPassword(email, password)
-            .then(() => {
+            .then((user) => {
                 profileUpdate(name, photoUrl)
-                    .then((user) => {
+                    .then(() => {
+                        // console.log("user=" + JSON.stringify(user, null, 2));
+                        // console.log("user?.user=" + user?.user);
                         setNewUserInDatabase(user?.user)
                             .then(() => {
-                                console.log("User Created");
                                 form.reset();
                                 navigate("/");
                             })
@@ -122,6 +124,12 @@ function SignUp() {
             setPassLength(false);
         }
     };
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [navigate, user]);
 
     return (
         <div className='w-ful h-screen my-28 px-18 md:px-28 grid place-items-center'>

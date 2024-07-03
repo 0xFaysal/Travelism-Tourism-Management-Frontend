@@ -59,7 +59,7 @@ function MyList() {
             setData(newData);
         });
         // console.log(data);
-    }, [filerItems]);
+    }, [filerItems, user.uid]);
 
     const handleChange = (selectedOption) => {
         if (selectedOption?.value === "views") {

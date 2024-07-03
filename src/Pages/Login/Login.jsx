@@ -2,13 +2,13 @@ import {Link, useNavigate} from "react-router-dom";
 import google from "../../assets/google.svg";
 import github from "../../assets/github-mark.svg";
 import image from "../../assets/pic5.jpg";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "../../provider/AuthProvider";
-import {toast, Bounce} from "react-toastify";
+import notify from "./../../utility/Notify";
 
 function Login() {
     //context API
-    const {signInWithGoogle, signInWithGithub, signIn} =
+    const {signInWithGoogle, signInWithGithub, user, signIn} =
         useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -33,34 +33,6 @@ function Login() {
             .catch(() => {
                 //console.log(error);
             });
-    };
-
-    const notify = (msg, type = "error") => {
-        if (type === "error") {
-            toast.error(msg, {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Bounce,
-            });
-        } else {
-            toast.success(msg, {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Bounce,
-            });
-        }
     };
 
     const handleFormSubmit = (e) => {
@@ -102,6 +74,12 @@ function Login() {
                 }
             });
     };
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [navigate, user]);
 
     return (
         <div className='w-ful h-screen my-28 grid px-18 md:px-28 place-items-center'>

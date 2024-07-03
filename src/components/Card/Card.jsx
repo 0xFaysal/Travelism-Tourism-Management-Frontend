@@ -103,6 +103,7 @@ function Card({data, buttonType = "enabled"}) {
                     </div>
                 </div>
             </div>
+            {console.clear()}
         </div>
     );
 }

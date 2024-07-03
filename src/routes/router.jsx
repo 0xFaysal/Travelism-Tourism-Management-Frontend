@@ -10,6 +10,7 @@ import TouristSpots from "../Pages/TouristSpots/TouristSpots";
 import MyList from "../Pages/MyList/MyList";
 import FulDetails from "../Pages/FullDetails/FulDetails";
 import Update from "../Pages/Update/Update";
+import Profile from "../Pages/Profile/Profile";
 
 const router = createBrowserRouter([
     {
@@ -71,7 +72,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profile",
-                element: <h1>Profile</h1>,
+                element: (
+                    <Privet>
+                        <Profile></Profile>
+                    </Privet>
+                ),
             },
         ],
     },
