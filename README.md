@@ -94,7 +94,9 @@ Connect with me to learn more about my journey and the technologies used in this
 - **react-lottie**: Lottie animations for React.
 - **react-awesome-reveal**: Animation library for React.
 - **react-tooltip**: Tooltip library for React.
-<br>
+
+----------------
+
 - **@emotion/react**: Emotion React bindings.
 - **animate.css**: Library for animations.
 - **firebase**: Firebase SDK.
@@ -108,6 +110,7 @@ Connect with me to learn more about my journey and the technologies used in this
 - **react-toastify**: Toast notifications for React.
 - **sort-by**: Utility for sorting arrays.
 - **sweetalert**: SweetAlert library for JavaScript.
+- **HelmetJs**
 
 ## DevDependencies
 
