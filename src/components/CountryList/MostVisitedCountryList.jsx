@@ -8,11 +8,12 @@ import img3 from "../../assets/LANGKAWI.jpg";
 import img4 from "../../assets/180403062612-03-most-beautiful-places-in-vietnam-restricted.jpg";
 import img5 from "../../assets/1_VnT2NnUgJOgkiYtgv-Tfjg.jpg";
 import {Fade} from "react-awesome-reveal";
+import {Link} from "react-router-dom";
 
 function MostVisitedCountryList() {
     return (
         <div className='mt-16 px-8 container mx-auto' id='first'>
-            <Fade triggerOnce duration={500} cascade>
+            <Fade triggerOnce duration={200} cascade>
                 <h2 className='text-accent font-medium text-lg'>
                     Most Visited Countries
                 </h2>
@@ -28,9 +29,12 @@ function MostVisitedCountryList() {
                         <h1 className='text-xl font-semibold mt-4'>
                             Travel to Bangladesh
                         </h1>
-                        <p className='text-accent'>
-                            See more <FaArrowRight className='inline text-sm' />
-                        </p>
+                        <Link to='/tourist_spots'>
+                            <p className='text-accent'>
+                                See more{" "}
+                                <FaArrowRight className='inline text-sm' />
+                            </p>
+                        </Link>
                     </div>
                     <div className='carousel-item flex-col gap-y-0'>
                         <img
@@ -40,9 +44,12 @@ function MostVisitedCountryList() {
                         <h1 className='text-xl font-semibold mt-4'>
                             Travel to Thailand
                         </h1>
-                        <p className='text-accent'>
-                            See more <FaArrowRight className='inline text-sm' />
-                        </p>
+                        <Link to='/tourist_spots'>
+                            <p className='text-accent'>
+                                See more{" "}
+                                <FaArrowRight className='inline text-sm' />
+                            </p>
+                        </Link>
                     </div>
                     <div className='carousel-item flex-col gap-y-0'>
                         <img
@@ -52,9 +59,12 @@ function MostVisitedCountryList() {
                         <h1 className='text-xl font-semibold mt-4'>
                             Travel to Malaysia
                         </h1>
-                        <p className='text-accent'>
-                            See more <FaArrowRight className='inline text-sm' />
-                        </p>
+                        <Link to='/tourist_spots'>
+                            <p className='text-accent'>
+                                See more{" "}
+                                <FaArrowRight className='inline text-sm' />
+                            </p>
+                        </Link>
                     </div>
                     <div className='carousel-item flex-col gap-y-0'>
                         <img
@@ -64,9 +74,12 @@ function MostVisitedCountryList() {
                         <h1 className='text-xl font-semibold mt-4'>
                             Travel to Vietnam
                         </h1>
-                        <p className='text-accent'>
-                            See more <FaArrowRight className='inline text-sm' />
-                        </p>
+                        <Link to='/tourist_spots'>
+                            <p className='text-accent'>
+                                See more{" "}
+                                <FaArrowRight className='inline text-sm' />
+                            </p>
+                        </Link>
                     </div>
                     <div className='carousel-item flex-col gap-y-0'>
                         <img
@@ -76,9 +89,12 @@ function MostVisitedCountryList() {
                         <h1 className='text-xl font-semibold mt-4'>
                             Travel to Cambodia
                         </h1>
-                        <p className='text-accent'>
-                            See more <FaArrowRight className='inline text-sm' />
-                        </p>
+                        <Link to='/tourist_spots'>
+                            <p className='text-accent'>
+                                See more{" "}
+                                <FaArrowRight className='inline text-sm' />
+                            </p>
+                        </Link>
                     </div>
                 </div>
             </Fade>
