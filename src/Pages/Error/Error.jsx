@@ -2,6 +2,7 @@ import Lottie from "react-lottie";
 import * as animationData from "../../assets/Animation - 1717132393058.json";
 import {Link} from "react-router-dom";
 import "animate.css";
+import Header from "../../utility/Header";
 
 function Error() {
     const defaultOptions = {
@@ -32,6 +33,7 @@ function Error() {
                     {" "}
                     Home
                 </Link>
+                <Header title='Page not found' />
             </div>
         </div>
     );

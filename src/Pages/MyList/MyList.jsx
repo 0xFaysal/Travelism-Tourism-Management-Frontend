@@ -4,6 +4,7 @@ import Card from "../../components/Card/Card";
 import {AuthContext} from "../../provider/AuthProvider";
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
+import Header from "../../utility/Header";
 
 const options = [
     {value: "views", label: "Total Viewed"},
@@ -120,6 +121,7 @@ function MyList() {
 
     return (
         <section className='container mx-auto mt-28'>
+            <Header title='My List' />
             <div className='flex flex-col md:flex-row items-center justify-around gap-4 mt-8'>
                 <button
                     className='btn btn-secondary w-3/4 md:w-32 font-bold text-xl leading-3'

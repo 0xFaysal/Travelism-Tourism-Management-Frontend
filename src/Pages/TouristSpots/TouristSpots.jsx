@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import Select from "react-select";
 import Card from "../../components/Card/Card";
+import Header from "../../utility/Header";
 
 const options = [
     {value: "views", label: "Total Viewed"},
@@ -102,6 +103,7 @@ function TouristSpots() {
     }, [filerItems]);
     return (
         <section className='container mx-auto mt-28'>
+            <Header title='Tourist Spots' />
             <div className='flex flex-col md:flex-row items-center justify-center gap-4 mt-8'>
                 <div>
                     <div className='border-2 border-base-content px-3 py-2 rounded-full backdrop-blur-lg'>

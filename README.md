@@ -84,7 +84,7 @@ Building this website not only allowed me to practice and consolidate my skills 
 
 Connect with me to learn more about my journey and the technologies used in this project!
 
-[LinkedIn Profile](https://www.linkedin.com/in/faysal-ahmed-fahim-408166314/) | [GitHub Repository](https://github.com/0xFaysal)
+[LinkedIn Profile](www.linkedin.com/in/faysal-ahmed-fahim01) | [GitHub Repository](https://github.com/0xFaysal)
 
 # Npm Package List
 
@@ -110,7 +110,7 @@ Connect with me to learn more about my journey and the technologies used in this
 - **react-toastify**: Toast notifications for React.
 - **sort-by**: Utility for sorting arrays.
 - **sweetalert**: SweetAlert library for JavaScript.
-- **HelmetJs**
+- **React-Helmet**
 
 ## DevDependencies
 

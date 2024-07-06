@@ -5,6 +5,7 @@ import image from "../../assets/pic5.jpg";
 import {useContext, useEffect} from "react";
 import {AuthContext} from "../../provider/AuthProvider";
 import notify from "./../../utility/Notify";
+import Header from "../../utility/Header";
 
 function Login() {
     //context API
@@ -83,6 +84,7 @@ function Login() {
 
     return (
         <div className='w-ful h-screen my-28 grid px-18 md:px-28 place-items-center'>
+            <Header title='Login' />
             <div className='flex flex-row-reverse justify-center items-stretch h-full'>
                 <div
                     className='w-96 p-6 px-18 lg:px-24 pt-12 bg-white rounded-lg shadow-lg flex-grow'

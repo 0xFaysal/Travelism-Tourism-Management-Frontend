@@ -9,6 +9,7 @@ import google from "../../assets/google.svg";
 import github from "../../assets/github-mark.svg";
 import image from "../../assets/pic4-min (1).jpg";
 import notify from "../../utility/Notify";
+import Header from "../../utility/Header";
 
 function SignUp() {
     //all the states
@@ -133,6 +134,7 @@ function SignUp() {
 
     return (
         <div className='w-ful h-screen my-28 px-18 md:px-28 grid place-items-center'>
+            <Header title='Sign Up' />
             <div className='flex justify-center items-stretch h-full'>
                 <div
                     className='w-96 p-6 px-8 lg:px-24 bg-white rounded-lg shadow-lg flex-grow'

@@ -133,7 +133,7 @@ function Navbar() {
                                 className='w-16'
                             />
                             <h1 className='font-raleway text-2xl uppercase text-base-content  font-bold'>
-                                Tavelism
+                                Travelism
                             </h1>
                         </div>
                     </Link>

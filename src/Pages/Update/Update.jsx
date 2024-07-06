@@ -3,6 +3,7 @@ import Card from "./../../components/Card/Card";
 import {AuthContext} from "../../provider/AuthProvider";
 import swal from "sweetalert";
 import {useLoaderData, useNavigate} from "react-router-dom";
+import Header from "../../utility/Header";
 
 function Update() {
     const loaderData = useLoaderData();
@@ -81,6 +82,7 @@ function Update() {
 
     return (
         <div className='container mx-auto mt-24 mb-12'>
+            <Header title='Update Tourist Spot' />
             <div className='w-full h-full flex flex-col lg:flex-row items-center justify-center gap-20'>
                 <div
                     className='p-6 px-12 lg:px-24 pt-12 bg-white rounded-lg shadow-lg'

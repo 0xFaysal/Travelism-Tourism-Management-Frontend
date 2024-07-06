@@ -1,4 +1,5 @@
 import {useLoaderData} from "react-router-dom";
+import Header from "../../utility/Header";
 
 function FulDetails() {
     const data = useLoaderData();
@@ -19,6 +20,7 @@ function FulDetails() {
     } = data;
     return (
         <section className='container mx-auto mt-24 mb-12'>
+            <Header title={tourists_spot_name} />
             <div className='w-full flex flex-col items-center px-8 md:px-20 lg:px-36 gap-y-4'>
                 <img
                     src={image}

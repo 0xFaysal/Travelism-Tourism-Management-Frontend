@@ -1,5 +1,6 @@
 import {useContext} from "react";
 import {AuthContext} from "./../../provider/AuthProvider";
+import Header from "../../utility/Header";
 
 function Profile() {
     const {user} = useContext(AuthContext);
@@ -9,6 +10,7 @@ function Profile() {
     return (
         <div className='w-full h-screen my-28 px-18 flex flex-col items-center md:px-28'>
             <div className='avatar'>
+                <Header title='Profile' />
                 <div className='w-56 rounded-full'>
                     <img src={photoURL} />
                 </div>

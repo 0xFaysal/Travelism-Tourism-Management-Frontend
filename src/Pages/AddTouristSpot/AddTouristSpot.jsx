@@ -2,6 +2,7 @@ import {useContext, useState} from "react";
 import Card from "./../../components/Card/Card";
 import {AuthContext} from "../../provider/AuthProvider";
 import swal from "sweetalert";
+import Header from "../../utility/Header";
 
 function AddTouristSpot() {
     const [touristSpotName, setTouristSpotName] = useState(
@@ -78,6 +79,7 @@ function AddTouristSpot() {
 
     return (
         <div className='container mx-auto mt-24 mb-12'>
+            <Header title='Add Tourist Spot' />
             <div className='w-full h-full flex flex-col lg:flex-row items-center justify-center gap-20'>
                 <div
                     className='p-6 px-12 lg:px-24 pt-12 bg-white rounded-lg shadow-lg'
